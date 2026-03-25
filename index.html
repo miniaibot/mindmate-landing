@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>減壓生活實驗室｜Notion 模板 + AI 工具 | 一次性購買，永久使用</title>
+    <title>miniaibot | Notion 減壓生活模板 + AI 生產力工具</title>
     <meta name="description" content="Notion 減壓生活模板套裝 + AI 生產力工具懶人包。一次性購買，永久使用。7天無條件退款。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #4A90A4;
-            --secondary: #6BB5A2;
-            --warning: #E74C3C;
-            --dark: #2C3E50;
+            --primary: #0D4F4F;
+            --primary-light: #1A7A7A;
+            --secondary: #2AA5A5;
+            --accent: #F4A261;
+            --dark: #1A1A2E;
             --light: #F8F9FA;
-            --muted: #6C757D;
+            --white: #FFFFFF;
+            --gray: #6B7280;
+            --gray-light: #E5E7EB;
+            --success: #10B981;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-sm: 0 4px 15px rgba(0,0,0,0.08);
         }
         
         * {
@@ -22,481 +34,718 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
             color: var(--dark);
-            background: var(--light);
+            background: var(--white);
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 24px;
         }
         
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            border-radius: 0 0 30px 30px;
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-light);
+            z-index: 1000;
+            padding: 16px 0;
         }
         
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            margin-bottom: 24px;
-        }
-        
-        /* Warning Banner */
-        .warning-banner {
-            background: #FFF3CD;
-            border: 2px solid #FFC107;
-            border-radius: 12px;
-            padding: 16px;
-            margin: 24px 0;
-            text-align: center;
-        }
-        
-        .warning-banner strong {
-            color: #856404;
-        }
-        
-        .warning-icon {
-            font-size: 1.5rem;
-            margin-right: 8px;
-        }
-        
-        /* Sections */
-        section {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        h2 {
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--primary);
-            font-size: 1.6rem;
-            margin-bottom: 24px;
-            text-align: center;
+            text-decoration: none;
         }
         
-        h3 {
-            color: var(--dark);
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-        }
-        
-        /* Pain Points */
-        .pain-list {
+        .nav-links {
+            display: flex;
+            gap: 32px;
             list-style: none;
         }
         
-        .pain-list li {
-            padding: 16px;
-            background: #FFF5F5;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--warning);
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
         }
         
-        /* Solutions */
-        .solution-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .nav-links a:hover {
+            color: var(--primary);
         }
         
-        .solution-card {
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(180deg, #F0F9F9 0%, var(--white) 100%);
+        }
+        
+        .hero-content {
             text-align: center;
-            padding: 24px;
-            background: #F0FDF4;
-            border-radius: 12px;
-            border-top: 4px solid var(--secondary);
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .solution-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-        
-        /* Templates Preview */
-        .template-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-        }
-        
-        .template-item {
-            padding: 20px;
-            background: #F8F9FA;
-            border-radius: 8px;
-            border: 1px solid #E0E0E0;
-        }
-        
-        .template-badge {
+        .hero-badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .hero h1 span {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
         }
         
-        .badge-free {
-            background: #D4EDDA;
-            color: #155724;
+        .btn-primary {
+            background: var(--primary);
+            color: white;
         }
         
-        .badge-paid {
-            background: #CCE5FF;
-            color: #004085;
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
         
-        /* Pricing */
-        .pricing-section {
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        /* Stats */
+        .stats {
+            padding: 60px 0;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .stat-item {
             text-align: center;
         }
         
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 8px;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            background: rgba(42, 165, 165, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--gray);
             max-width: 600px;
             margin: 0 auto;
         }
         
-        .price-card {
-            padding: 32px;
-            border-radius: 16px;
-            border: 2px solid #E0E0E0;
-            transition: transform 0.3s;
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
         
-        .price-card.featured {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, #F8FBFD 0%, #E8F4F8 100%);
-            transform: scale(1.05);
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--gray-light);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
             position: relative;
         }
         
-        .price-card .badge {
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--secondary);
+        }
+        
+        .product-card.featured {
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .product-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--secondary);
+            background: var(--accent);
             color: white;
-            padding: 4px 16px;
-            border-radius: 20px;
+            padding: 6px 20px;
+            border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
         }
         
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 16px 0;
-        }
-        
-        .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--muted);
-        }
-        
-        .price-features {
-            list-style: none;
-            text-align: left;
-            margin: 20px 0;
-        }
-        
-        .price-features li {
-            padding: 8px 0;
-            border-bottom: 1px solid #EEE;
-        }
-        
-        .price-features li:last-child {
-            border-bottom: none;
-        }
-        
-        /* CTA Button */
-        .cta-button {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 18px 48px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(74, 144, 164, 0.4);
-            margin-top: 20px;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 144, 164, 0.5);
-        }
-        
-        /* FAQ */
-        .faq-item {
-            margin-bottom: 20px;
-            padding: 16px;
-            background: #F8F9FA;
-            border-radius: 8px;
-        }
-        
-        .faq-question {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 8px;
-        }
-        
-        .faq-answer {
-            color: var(--muted);
-        }
-        
-        /* Legal Footer */
-        .legal-footer {
-            background: #2C3E50;
-            color: white;
-            padding: 40px 20px;
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 16px;
-            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
         }
         
-        .legal-footer h3 {
-            color: white;
-            margin-bottom: 16px;
-        }
-        
-        .legal-footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
             margin-bottom: 12px;
         }
         
-        .legal-footer a {
-            color: var(--secondary);
+        .product-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
         }
         
-        /* Compliance Box */
-        .compliance-box {
-            background: #E8F4F8;
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            padding: 16px;
-            margin: 20px 0;
+        .product-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .product-features li {
+            padding: 8px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .product-features li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        .product-price {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .price-currency {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+        
+        .price-note {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .product-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        
+        .product-btn:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: #F0F9F9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* Testimonial */
+        .testimonial {
+            padding: 100px 0;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 30px;
+            padding: 60px;
+            color: white;
+            text-align: center;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 24px;
+        }
+        
+        .testimonial-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 24px;
+            font-weight: 300;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 0;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        footer p {
+            opacity: 0.6;
             font-size: 0.9rem;
         }
         
-        .compliance-box h4 {
-            color: var(--primary);
-            margin-bottom: 8px;
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
         }
         
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            section { padding: 24px; }
-            .price-card.featured { transform: none; }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Navigation -->
+    <nav>
         <div class="container">
-            <h1>告別壓力，掌控生活</h1>
-            <p class="subtitle">Notion 減壓生活模板 + AI 生產力工具 | 一次性購買，永久使用</p>
-        </div>
-    </header>
-    
-    <div class="container">
-        <!-- 收費告知（強制） -->
-        <div class="warning-banner">
-            <span class="warning-icon">🎁</span>
-            <strong>一次性購買，永久使用</strong><br>
-            根據所選方案支付後，7 天無條件退款
-        </div>
-        
-        <!-- 痛點 -->
-        <section id="pain">
-            <h2>你是否也有這些困擾？</h2>
-            <ul class="pain-list">
-                <li><strong>😔 總是莫名擔心</strong><br>不確定自己在擔心什麼，但就是無法停止</li>
-                <li><strong>😰 睡不好、情緒波動</strong><br>壓力大影響睡眠，睡眠又加重壓力</li>
-                <li><strong>😓 想改變但不知從何做起</strong><br>看了一堆文章和方法，卻不知道哪個適合自己</li>
-                <li><strong>😤 感覺沒有人理解</strong><br>不想麻煩朋友，不想傳遞負能量</li>
+            <a href="#" class="logo">miniaibot</a>
+            <ul class="nav-links">
+                <li><a href="#products">產品</a></li>
+                <li><a href="#features">功能</a></li>
+                <li><a href="#testimonial">用戶評價</a></li>
             </ul>
-        </section>
-        
-        <!-- 解決方案 -->
-        <section id="solutions">
-            <h2>我們如何幫你？</h2>
-            <div class="solution-grid">
-                <div class="solution-card">
-                    <div class="solution-icon">📅</div>
-                    <h3>7 天模板挑戰</h3>
-                    <p>每日任務引導，逐步建立健康心態</p>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">🧠</div>
-                    <h3>實用技巧</h3>
-                    <p>由情緒管理愛好者設計的實用方法</p>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">📊</div>
-                    <h3>數據追蹤進步</h3>
-                    <p>視覺化數據，看見自己的成長軌跡</p>
-                </div>
-                <div class="solution-card">
-                    <div class="solution-icon">🔒</div>
-                    <h3>隱私保護</h3>
-                    <p>資料由 Notion 加密存儲，你可隨時匯出或刪除</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 模板預覽 -->
-        <section id="templates">
-            <h2>模板內容</h2>
-            <div class="template-list">
-                <div class="template-item">
-                    <span class="template-badge badge-free">免費</span>
-                    <h3>每日心情日誌</h3>
-                    <p>記錄心情、原因、緩解措施</p>
-                </div>
-                <div class="template-item">
-                    <span class="template-badge badge-free">免費</span>
-                    <h3>觸發器清單</h3>
-                    <p>識別個人壓力來源</p>
-                </div>
-                <div class="template-item">
-                    <span class="template-badge badge-free">免費</span>
-                    <h3>7 天減壓挑戰</h3>
-                    <p>每日小任務，建立健康習慣</p>
-                </div>
-                <div class="template-item">
-                    <span class="template-badge badge-free">免費</span>
-                    <h3>呼吸練習指南</h3>
-                    <p>4-7-8 呼吸法說明</p>
-                </div>
-                <div class="template-item">
-                    <span class="template-badge badge-paid">付費專屬</span>
-                    <h3>進階練習工作表</h3>
-                    <p>壓力評估量表、情緒覺察練習、呼吸習慣追蹤、壓力源分析、減壓行動計劃</p>
-                </div>
-                <div class="template-item">
-                    <span class="template-badge badge-paid">付費專屬</span>
-                    <h3>進階追蹤儀表板</h3>
-                    <p>每週回顧、壓力源統計、減壓活動有效性、月度總結</p>
-                </div>
-            </div>
-            
-            <div class="compliance-box">
-                <h4>📋 購買說明</h4>
-                <p>• 一次性購買，永久使用<br>
-                • 根據所選方案支付後，7 天無條件退款</p>
-            </div>
-        </section>
-        
-        <!-- 定價 -->
-        <section id="pricing" class="pricing-section">
-            <h2>簡單的定價</h2>
-            <div class="pricing-grid">
-                <div class="price-card featured">
-                    <h3>Notion 減壓生活模板套裝</h3>
-                    <div class="price">HKD 39<span>一次性</span></div>
-                    <ul class="price-features">
-                        <li>✓ 全部 7 個模板永久使用</li>
-                        <li>✓ 5份進階練習工作表</li>
-                        <li>✓ 30天追蹤儀表板</li>
-                        <li>✓ 7 天無條件退款</li>
-                    </ul>
-                    <a href="https://minibot0.gumroad.com/l/notion-template" class="cta-button" target="_blank">立即購買</a>
-                </div>
-                <div class="price-card">
-                    <h3>AI 生產力工具懶人包</h3>
-                    <div class="price">HKD 62<span>一次性</span></div>
-                    <ul class="price-features">
-                        <li>✓ 20 個內容創作 Prompt</li>
-                        <li>✓ 15 個數據分析 Prompt</li>
-                        <li>✓ 15 個創意發想 Prompt</li>
-                        <li>✓ 5 個自動化腳本</li>
-                        <li>✓ 2 個工作流範本</li>
-                        <li>✓ 7 天無條件退款</li>
-                    </ul>
-                    <a href="https://minibot0.gumroad.com/l/uogyeg" class="cta-button" target="_blank" style="background: var(--secondary);">立即購買</a>
-                </div>
-                <div class="price-card featured">
-                    <span class="badge" style="background: #E74C3C;">組合優惠</span>
-                    <h3 style="margin-top: 10px;">減壓生活套裝</h3>
-                    <div class="price">HKD 89<span>一次性</span></div>
-                    <ul class="price-features">
-                        <li>✓ Notion 模板套裝（HKD 39）</li>
-                        <li>✓ AI 工具懶人包（HKD 62）</li>
-                        <li>✓ 慳 HKD 12</li>
-                        <li>✓ 7 天無條件退款</li>
-                    </ul>
-                    <a href="https://minibot0.gumroad.com/l/bundle" class="cta-button" target="_blank">立即購買</a>
-                </div>
-            </div>
-            
-            <div class="compliance-box">
-                <h4>⚠️ 購買須知</h4>
-                <p>• <strong>一次性購買：</strong>根據所選方案支付後，永久使用<br>
-                • <strong>無月費：</strong>無需訂閱，無持續收費<br>
-                • <strong>退款政策：</strong>7 天內無條件退款<br>
-                • <strong>取消政策：</strong>無需取消，一次購買永久使用</p>
-            </div>
-        </section>
-        
-        <!-- FAQ -->
-        <section id="faq">
-            <h2>常見問題</h2>
-            <div class="faq-item">
-                <div class="faq-question">Q: 這個模板可以用多久？</div>
-                <div class="faq-answer">A: 一次性購買後，永久使用，無需續費。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Q: 我的資料安全嗎？</div>
-                <div class="faq-answer">A: 所有數據均加密存儲，我們不會未經同意分享您的個人資料。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Q: 這個模板有效嗎？</div>
-                <div class="faq-answer">A: 模板參考心理學研究設計的實用技巧，效果因人而異。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Q: 如何退款？</div>
-                <div class="faq-answer">A: 7 天內聯繫客服即可無條件退款。</div>
-            </div>
-        </section>
-    </div>
+        </div>
+    </nav>
     
-    <!-- Legal Footer -->
-    <div class="container">
-        <footer class="legal-footer">
-            <h3>法律資訊</h3>
-            <p><strong>⚠️ 重要聲明：</strong></p>
-            <p>本產品為生活優化工具，不構成任何醫療建議。如有嚴重健康問題，請諮詢專業人員。</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">✨ AI 驅動的生產力工具</span>
+                <h1>讓生活更輕鬆<br><span>由 miniaibot 開始</span></h1>
+                <p>Notion 模板 + AI 生產力工具，助你告別壓力，高效生活</p>
+                
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">
+                        查看產品 💼
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        了解更多
+                    </a>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="trust-item">
+                        <span class="trust-icon">🔒</span>
+                        <span>安全加密</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">💳</span>
+                        <span>7天退款</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">♾️</span>
+                        <span>永久使用</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">AI 提示詞</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Notion 模板</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">天追蹤系統</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">滿意度</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">精選產品</span>
+                <h2 class="section-title">選擇適合你的方案</h2>
+                <p class="section-desc">一次性購買，永久使用。簡單、透明、無隱藏費用。</p>
+            </div>
             
-            <h4 style="margin-top: 20px;">隱私政策</h4>
-            <p>您的資料僅用於模板個人化，不會分享給第三方，詳見我們的隱私政策。</p>
-            <p>資料由 Notion 加密存儲，您可隨時匯出或刪除。</p>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-icon">📝</div>
+                    <h3>Notion 減壓生活模板</h3>
+                    <p>7個免費模板 + 5個付費專區，快速追蹤情緒與壓力</p>
+                    <ul class="product-features">
+                        <li>情緒日誌</li>
+                        <li>觸發器清單</li>
+                        <li>7天減壓挑戰</li>
+                        <li>30天追蹤儀表板</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price-amount">HKD 39</span>
+                        <span class="price-currency"> / 一次性</span>
+                        <div class="price-note">永久使用</div>
+                    </div>
+                    <a href="https://minibot0.gumroad.com/l/notion-template" class="product-btn" target="_blank">
+                        立即購買
+                    </a>
+                </div>
+                
+                <!-- Product 2 - Featured -->
+                <div class="product-card featured">
+                    <span class="product-badge">熱銷</span>
+                    <div class="product-icon">🤖</div>
+                    <h3>AI 生產力工具懶人包</h3>
+                    <p>50+ 實際可用的 AI Prompt，即學即用</p>
+                    <ul class="product-features">
+                        <li>20 個內容創作 Prompt</li>
+                        <li>15 個數據分析 Prompt</li>
+                        <li>15 個創意發想 Prompt</li>
+                        <li>5 個自動化腳本</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price-amount">HKD 62</span>
+                        <span class="price-currency"> / 一次性</span>
+                        <div class="price-note">永久使用</div>
+                    </div>
+                    <a href="https://minibot0.gumroad.com/l/uogyeg" class="product-btn" target="_blank">
+                        立即購買
+                    </a>
+                </div>
+                
+                <!-- Product 3 - Bundle -->
+                <div class="product-card">
+                    <span class="product-badge">慳 HKD 12</span>
+                    <div class="product-icon">🎁</div>
+                    <h3>減壓生活套裝</h3>
+                    <p>兩個產品一次過擁有，最高性價比</p>
+                    <ul class="product-features">
+                        <li>Notion 模板套裝</li>
+                        <li>AI 工具懶人包</li>
+                        <li>額外折扣</li>
+                        <li>終身更新</li>
+                    </ul>
+                    <div class="product-price">
+                        <span class="price-amount">HKD 89</span>
+                        <span class="price-currency"> / 一次性</span>
+                        <div class="price-note">慳 HKD 12</div>
+                    </div>
+                    <a href="https://minibot0.gumroad.com/l/bundle" class="product-btn" target="_blank">
+                        立即購買
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">為什麼選擇我們</span>
+                <h2 class="section-title">簡單、有效、可靠</h2>
+                <p class="section-desc">專為香港人而設計的生產力工具</p>
+            </div>
             
-            <p style="margin-top: 20px;">如有查詢，請聯繫：miniaibot@gmail.com | <a href="privacy-policy.html" style="color: var(--secondary);">詳見我們的隱私政策</a></p>
-            <p style="margin-top: 20px; opacity: 0.6;">© 2026 All rights reserved.</p>
-        </footer>
-    </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>即學即用</h3>
+                    <p>不懂技術？沒問題！詳細教學，輕鬆上手</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>終身更新</h3>
+                    <p>一次購買，永遠享受最新功能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>7天退款</h3>
+                    <p>不滿意？7天內無條件退款，零風險</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonial -->
+    <section class="testimonial" id="testimonial">
+        <div class="container">
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">👤</div>
+                <p class="testimonial-text">「用咗之後發現真係幫到我管理壓力！Notion 模板好容易用，AI Prompt 幫我慳咗好多時間！」</p>
+                <div class="testimonial-author">— 香港用戶</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>準備好提升你的生產力了嗎？</h2>
+            <p>立即開始，讓 AI 幫你打工</p>
+            <a href="#products" class="btn btn-primary">立即選購</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 miniaibot | <a href="privacy-policy.html">隱私政策</a></p>
+        </div>
+    </footer>
 </body>
 </html>
